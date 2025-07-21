@@ -7,11 +7,12 @@ export default async function handler(req, res) {
   // TODO: Replace with your analytics logic
   console.log(`[Usage] ${siteUrl} - Plugin v${pluginVersion}`);
 
-  const response = await fetch('https://external-api.com/endpoint', {
+  const response = await fetch('https://connect.instacart.com', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${INSTACART_API_KEY}`,
       'Content-Type': 'application/json',
+      'accept': 'application/json',
     },
     body: JSON.stringify(req.body),
   });
