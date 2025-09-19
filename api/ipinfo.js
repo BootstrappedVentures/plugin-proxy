@@ -23,10 +23,7 @@ export default async function handler(req, res) {
       const response = await fetch(ipinfoUrl);
       const data = await response.text(); // IPInfo lite endpoint returns plain text
       
-      res.status(200).json({ 
-        ip: ip,
-        data: data 
-      });
+      res.status(200).json(JSON.parse(data));
     } catch (error) {
       console.error('Error fetching IPInfo data:', error);
       res.status(500).json({ error: 'Failed to fetch IPInfo data' });
