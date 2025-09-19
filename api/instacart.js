@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   const BETTERSTACK_URL = process.env.BETTERSTACK_URL;
   const BETTERSTACK_KEY = process.env.BETTERSTACK_KEY;
 
-  fetch( BETTERSTACK_URL, {
+  const logPromise = fetch( BETTERSTACK_URL, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${BETTERSTACK_KEY}`,
@@ -40,6 +40,7 @@ export default async function handler(req, res) {
       feature: `instacart-${instacartType}`,
       site: siteUrl,
       version: pluginVersion,
+      timestamp: new Date().toISOString(),
     }),
   }).catch(console.error); // Don’t block proxy if logging fails
 
@@ -55,5 +56,9 @@ export default async function handler(req, res) {
   });
 
   const data = await response.json();
+
+  // Wait for logging to finish.
+  await logPromise;
+
   res.status(200).json(data);
 }
