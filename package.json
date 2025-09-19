@@ -1,5 +1,5 @@
 {
-  "name": "wprm-proxy",
+  "name": "plugin-proxy",
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
